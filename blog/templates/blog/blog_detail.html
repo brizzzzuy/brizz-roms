@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} - BrizZ Blog{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="blog-container">
+    <article class="post-detail-content">
+        <h1>{{ post.title }}</h1>
+        <p class="post-list-meta">
+            By {{ post.author.username }} on {{ post.created_on|date:"F d, Y" }}
+        </p>
+
+        {% if post.featured_image %}
+            <div class="post-detail-header">
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+            </div>
+        {% endif %}
+
+        {{ post.content }}
+    </article>
+</div>
+{% endblock %}

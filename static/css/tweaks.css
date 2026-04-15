@@ -1,0 +1,108 @@
+/* static/css/tweaks.css */
+
+.tweaks-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.tweaks-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.tweaks-header h1 {
+    font-size: 3rem;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.tweaks-header .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+/* --- Tweak Grid --- */
+.tweak-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px;
+}
+
+.tweak-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.tweak-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(79, 135, 242, 0.2);
+    border-color: rgba(79, 135, 242, 0.35);
+}
+
+/* Icon — sensible fixed size, no negative-margin hacks */
+.tweak-icon-container {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background-color: rgba(79, 135, 242, 0.08);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.tweak-icon {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+.tweak-card h2 {
+    margin: 0 0 10px 0;
+    color: var(--text);
+    font-size: 1.3rem;
+}
+
+.tweak-card p {
+    color: var(--text-dim);
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.btn-download {
+    display: inline-block;
+    background-color: var(--accent);
+    color: var(--text);
+    text-decoration: none;
+    padding: 11px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    margin-top: auto;
+}
+
+.btn-download:hover {
+    background-color: var(--accent-dark);
+    box-shadow: 0 0 18px var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .tweak-grid {
+        grid-template-columns: 1fr;
+    }
+}

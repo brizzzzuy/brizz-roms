@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - BrizZ{% endblock %}
+
+{% block extra_css %}
+    {# This links the special stylesheet just for this page #}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="about-container">
+    <h1>About BrizZ's Team</h1>
+    <p class="tagline">Crafting refined and powerful Android experiences.</p>
+
+    <p>
+        Welcome to BrizZ, a project dedicated to providing a clean, stable, and highly customizable Android operating system. Our philosophy is rooted in the belief that you should have complete control over your device. We build upon the solid foundation of AOSP or HyperOS, infusing it with thoughtful features and performance enhancements that empower our users without sacrificing the simplicity and speed of stock Android.
+    </p>
+
+    <h2>Meet the Team</h2>
+
+    <div class="team-grid">
+        {# This loop will create a card for each team member in your database #}
+        {% for member in team_members %}
+            <div class="team-member-card">
+                {% if member.avatar %}
+                    <img src="{{ member.avatar.url }}" alt="Avatar for {{ member.name }}">
+                {% else %}
+                    {# Creates a placeholder with the first letter of the name if no avatar is uploaded #}
+                    <img src="https://placehold.co/120x120/4f87f2/FFFFFF?text={{ member.name|first }}" alt="Placeholder avatar">
+                {% endif %}
+                <h3>{{ member.name }}</h3>
+                <p class="role">{{ member.role }}</p>
+            </div>
+        {% empty %}
+            <p style="grid-column: 1 / -1; color: #ccc;">The team is currently undercover. Check back soon!</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
+

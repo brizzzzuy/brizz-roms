@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Devices - BrizZ{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/devices.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-container">
+  <h1>Supported Devices</h1>
+  <p class="subtitle">Find your device and download official builds</p>
+
+  <!-- Brand Filter Buttons -->
+  <div class="brand-filters">
+    <a href="?brand=All" class="filter-btn {% if selected_brand == 'All' %}active{% endif %}">All</a>
+    {% for brand in brands %}
+        <a href="?brand={{ brand }}" class="filter-btn {% if selected_brand == brand %}active{% endif %}">{{ brand }}</a>
+    {% endfor %}
+  </div>
+
+  <div class="device-grid">
+    {% for device in devices %}
+      <div class="device-card">
+        <!-- This link will be stretched by CSS to cover the entire card -->
+        <a href="{% url 'devices:device_detail' device.codename %}" class="card-link-overlay"></a>
+
+        <div class="card-image-container">
+            {% if device.image %}
+                <img src="{{ device.image.url }}" alt="{{ device.name }}">
+            {% else %}
+                <img src="{% static 'img/placeholder.png' %}" alt="Placeholder image">
+            {% endif %}
+        </div>
+        <div class="card-content">
+            <h2>{{ device.name }} <span class="codename">({{ device.codename }})</span></h2>
+            <div class="device-info">
+                <p><strong>Maintainer:</strong> {{ device.maintainer|default:"Unknown" }}</p>
+                <p><strong>Version:</strong> {{ device.latest_version|default:"N/A" }}</p>
+                <p><strong>Released:</strong> {{ device.released_date|date:"M d, Y" }}</p>
+                <p><strong>Size:</strong> {{ device.size|default:"N/A" }}</p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'devices:device_detail' device.codename %}" class="btn-changelog">Downloads</a>
+        </div>
+      </div>
+    {% empty %}
+      <p style="color: #ccc; grid-column: 1 / -1; text-align: center;">No devices match the current filter.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+

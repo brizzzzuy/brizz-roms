@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Brizz{% endblock %}
+
+{% block content %}
+<main class="hero">
+    <h1>Reconsider</h1>
+    <h1>Your Experience</h1>
+    <p>HyperOS, Tweaks and Customization</p>
+    <p class="tagline">We are <strong>Brizz's Team</strong></p>
+    <div class="cta-buttons">
+        <a style="text-decoration: none" href="{% url 'devices:device_list' %}" class="btn btn-primary">Deep into Unknown</a>
+    </div>
+</main>
+{% endblock %}

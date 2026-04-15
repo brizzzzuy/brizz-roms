@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ device.name }} - Downloads{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/device_details.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="detail-page-container">
+    <div class="device-title-header">
+        <h1>{{ device.name }} <span class="device-codename-header">{{ device.codename|upper }}</span></h1>
+    </div>
+
+    <!-- Build Version Filters (Tabs) -->
+    <div class="build-filters">
+        {% for build in builds %}
+            <a href="#" class="build-filter-btn {% if forloop.first %}active{% endif %}" data-build-id="{{ build.id }}">
+                Android {{ build.android_version }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- Build Details Cards (Only one is visible at a time) -->
+    {% for build in builds %}
+    <div class="build-details-card {% if not forloop.first %}hidden{% endif %}" id="build-card-{{ build.id }}">
+        <div class="build-image-col">
+            {% if device.image %}
+                <img src="{{ device.image.url }}" alt="{{ device.name }}" class="build-device-image">
+            {% else %}
+                <img src="{% static 'img/placeholder.png' %}" alt="Placeholder" class="build-device-image">
+            {% endif %}
+            <h2>{{ device.name }}</h2>
+            <p>({{ device.codename }})</p>
+        </div>
+        <div class="build-info-col">
+            <div class="info-grid">
+                <div><span>Android Version</span>{{ build.android_version }}</div>
+                <div><span>Build Version</span>{{ build.build_version }}</div>
+                <div><span>Date</span>{{ build.release_date|date:"D, M d, Y" }}</div>
+                <div><span>Type</span>{{ build.build_type }}</div>
+                <div><span>Size</span>{{ build.size }}</div>
+                <div><span>Maintained</span>{% if build.is_maintained %}Yes{% else %}No{% endif %}</div>
+            </div>
+            <div class="maintainer-box">
+                {% if device.maintainer_avatar %}
+                    <img src="{{ device.maintainer_avatar.url }}" alt="{{ device.maintainer }}" class="maintainer-avatar">
+                {% else %}
+                    <div class="maintainer-avatar-placeholder">{{ device.maintainer|first|upper }}</div>
+                {% endif %}
+                <div>
+                    <span class="maintainer-label">Maintainer</span>
+                    <span class="maintainer-name">{{ device.maintainer }}</span>
+                </div>
+            </div>
+            <div class="button-grid">
+                {% if build.install_guide_link %}<a href="{{ build.install_guide_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">How to Install</a>{% endif %}
+                {% if build.changelog_link %}<a href="{{ build.changelog_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Changelog</a>{% endif %}
+                <a href="{{ build.download_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download ROM ↗</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <a href="{% url 'devices:device_list' %}" class="back-link">← Back to All Devices</a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.build-filter-btn');
+        const buildCards = document.querySelectorAll('.build-details-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                const targetBuildId = this.getAttribute('data-build-id');
+                buildCards.forEach(card => {
+                    card.classList.toggle('hidden', card.id !== `build-card-${targetBuildId}`);
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}
