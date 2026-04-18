@@ -177,28 +177,122 @@ body::after {
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: calc(100vh - 100px);
-    padding: 0 20px;
+    min-height: calc(100vh - 140px);
+    padding: 60px 20px 40px;
     animation: fadeIn 0.8s ease-in-out;
 }
 
-.hero h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.2;
-    color: var(--accent);
+.hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(79, 135, 242, 0.08);
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    backdrop-filter: blur(8px);
 }
 
+.hero-title,
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, #b43ae2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.hero-lede,
 .hero p {
-    margin: 15px 0;
-    font-size: 1.2rem;
+    margin: 18px 0 6px;
+    font-size: 1.15rem;
     color: var(--text-dim);
+    max-width: 640px;
 }
 
 .hero .tagline {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
+}
+
+/* --- Features Section --- */
+.features {
+    padding: 80px 5% 40px;
+}
+
+.features-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.feature-card {
+    padding: 28px 24px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 40px -10px var(--accent-glow);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.feature-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+    color: var(--text);
+}
+
+.feature-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+/* --- CTA Band --- */
+.cta-band {
+    max-width: 800px;
+    margin: 40px auto 80px;
+    padding: 48px 32px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(79,135,242,0.12) 0%, rgba(180,58,226,0.10) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.cta-band h2 {
+    margin: 0 0 10px;
+    font-size: 1.8rem;
+    color: var(--text);
+}
+
+.cta-band p {
+    margin: 0 0 24px;
+    color: var(--text-dim);
 }
 
 /* --- CTA Buttons --- */

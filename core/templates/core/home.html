@@ -1,16 +1,48 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Home | Brizz{% endblock %}
+{% block title %}Home | BrizZ{% endblock %}
 
 {% block content %}
-<main class="hero">
-    <h1>Reconsider</h1>
-    <h1>Your Experience</h1>
-    <p>HyperOS, Tweaks and Customization</p>
-    <p class="tagline">We are <strong>Brizz's Team</strong></p>
+<section class="hero">
+    <span class="hero-badge">HyperOS · AOSP · Tweaks</span>
+    <h1 class="hero-title">Reconsider<br><span class="gradient-text">Your Experience</span></h1>
+    <p class="hero-lede">Debloated HyperOS builds, daily-driver stable, tuned for performance.</p>
+    <p class="tagline">Curated by <strong>Brizz's Team</strong></p>
     <div class="cta-buttons">
-        <a style="text-decoration: none" href="{% url 'devices:device_list' %}" class="btn btn-primary">Deep into Unknown</a>
+        <a href="{% url 'devices:device_list' %}" class="btn btn-primary">Browse ROMs</a>
+        <a href="{% url 'tweaks:tweak_list' %}" class="btn">Explore Tweaks</a>
     </div>
-</main>
+</section>
+
+<section class="features">
+    <div class="features-inner">
+        <article class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Tuned for Speed</h3>
+            <p>Debloated, overlay-fixed, and optimized. You get a ROM that actually feels faster.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">📸</div>
+            <h3>Camera that Works</h3>
+            <p>Leica Camera 6 integrated on supported builds. Stock-level quality, unlocked features.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Root & Integrity</h3>
+            <p>SukiSU / KernelSU ready. Integrity-fixed so banking apps keep working.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">🧪</div>
+            <h3>Actually Tested</h3>
+            <p>Every release gets daily-driver use before it lands here. No half-baked zips.</p>
+        </article>
+    </div>
+</section>
+
+<section class="cta-band">
+    <h2>New to flashing?</h2>
+    <p>Start with the install guide — bootloader unlock, custom recovery, and step-by-step flashing.</p>
+    <a href="{% url 'blog:post_list' %}" class="btn btn-primary">Read the Blog</a>
+</section>
 {% endblock %}
